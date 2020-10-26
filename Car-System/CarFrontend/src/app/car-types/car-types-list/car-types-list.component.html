@@ -1,0 +1,11 @@
+<p>car-types-list works!</p>
+<table class="table table-hover">
+<tr *ngFor="let type of carTypesService.carTypesList">
+  <td>
+    {{ type.carType_Id }}
+  </td>
+  <td>
+    {{ type.carType_Name }}
+  </td>
+</tr>
+</table>

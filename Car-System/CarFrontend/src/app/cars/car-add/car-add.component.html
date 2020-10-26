@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onAddCar()" *ngIf="!isLoading">
+
+    <mat-form-field>
+      <input matInput type="text" formControlName="car_Number" placeholder="Car Number">
+      <mat-error *ngIf="form.get('car_Number').invalid">Please enter a Car Number - 7/8 characters & Unique Number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select Car Type</mat-label>
+      <mat-select formControlName="carType_Id">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let type of carTypesService.carTypesList" [value]="type.carType_Id">
+          {{ type.carType_Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('carType_Id').invalid">Please choose a Car Type.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select if Car is 4x4</mat-label>
+      <mat-select formControlName="car_4X4">
+        <mat-option>None</mat-option>
+        <mat-option [value]="valueTrue">Yes</mat-option>
+        <mat-option [value]="valueFalse">No</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('car_4X4').invalid">Please if the Car is 4x4.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" formControlName="car_EngineCapacity" placeholder="Car Engine Capacity">
+      <mat-error *ngIf="form.get('car_EngineCapacity').invalid">Please enter a Car Engine Capacity.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" formControlName="car_YearProduction" placeholder="Car Year Production">
+      <mat-error *ngIf="form.get('car_YearProduction').invalid">Please enter a Car Year Production. The Year need to be between 1700-Today.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="text" formControlName="car_Remarks" placeholder="Car Remarks">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select Employee</mat-label>
+      <mat-select formControlName="employee_Id">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let employee of employeesService.employeesList" [value]="employee.employee_Id">
+          {{ employee.employee_FirstName }} {{ employee.employee_LastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="date" formControlName="car_CareDate" placeholder="Car Care Date" [value]="'1997-02-15'">
+      <mat-error *ngIf="form.get('car_CareDate').invalid">Please enter the last Car Care Date.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save Car</button>
+  </form>
+</mat-card>

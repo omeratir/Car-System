@@ -1,0 +1,61 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card>
+  <input matInput #searchcarnumber (keyup)="onSearchCarNumber()" type="text" placeholder="Search By Car Number"/> <br><br>
+  <input matInput #searchcartype (keyup)="onSearchCarType()" type="text" placeholder="Search By Car Type"/> <br><br>
+  <mat-checkbox [checked]="isChecked" (change)="isChecked = !isChecked; car4X4=undefined">Filter By 4X4 Car</mat-checkbox>
+  <div *ngIf="isChecked">
+  <mat-radio-group #searchcar4x4 (keyup)="onSearchCar4X4()" (change)="onChange()">
+    <mat-radio-button [value]="'Y'"> Yes </mat-radio-button>
+    <mat-radio-button [value]="'N'"> No </mat-radio-button>
+  </mat-radio-group>
+</div>
+</mat-card>
+<br>
+<br>
+<div class="row">
+  <div class="col-sm-8">
+    <mat-card>
+    <table id="cars-table">
+      <tr>
+        <th>Car Number</th>
+        <th>Car Type</th>
+        <th>4X4</th>
+        <th>Car Engine Capacity</th>
+        <th>Assigned To Employee</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let car of carService.carsList | carTypeFilter: carType | carNumberFilter: carNumber | car4X4Filter: car4X4; let id=index;"
+      [style.color] = "(rowClicked == id) ? 'white' : 'black' "
+      [style.background-color]="(rowClicked == id) ? 'grey' : null "
+      (click)="onClickRow(id,car)">
+        <td>{{car.car_Number}}</td>
+        <td>{{car.carType.carType_Name}}</td>
+        <td *ngIf="car.car_4X4"><mat-checkbox [checked]="car.car_4X4" [disabled]="true">Yes</mat-checkbox></td>
+        <td *ngIf="!car.car_4X4"><mat-checkbox [checked]="car.car_4X4" [disabled]="true">No</mat-checkbox></td>
+        <td>{{car.car_EngineCapacity}}</td>
+        <td *ngIf="car.employee_Id">Yes</td>
+        <td *ngIf="!car.employee_Id">No</td>
+        <td>
+          <button mat-mini-fab color="primary" [routerLink]="['/edit', car.car_Id.toString()]"><mat-icon>edit</mat-icon></button>
+        </td>
+        <td>
+          <button mat-mini-fab color="warn" (click)="onClickDeleteCar(car.car_Id)"><mat-icon>delete</mat-icon></button>
+        </td>
+      </tr>
+    </table>
+    </mat-card>
+    <br><button class="excelButton" (click)="exportTableToXLSX()"> <i class="fa fa-cloud-download" aria-hidden="true"></i> Export Table To Excel </button>
+    <br>
+    <br>
+  </div>
+  <div class="col-sm-4">
+    <div *ngIf="this.isInfoClicked">
+      <app-car-info [car]="this.car"></app-car-info>
+      <br>
+      <button mat-mini-fab color="warn" (click)="onClickCloseInfoButton()"><mat-icon>close</mat-icon></button>
+    </div>
+</div>
+
+
+

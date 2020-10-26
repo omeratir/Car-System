@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title><i class="fa fa-car" aria-hidden="true"></i> Car Info</mat-card-title>
+  <mat-card-subtitle>Car Number: {{ car.car_Number }}</mat-card-subtitle>
+  <mat-card-content>
+    <table>
+      <tr>
+        <td class="property-td">Type</td>
+        <td>{{ car.carType.carType_Name }}</td>
+      </tr>
+      <tr>
+        <td class="property-td">4X4</td>
+        <td *ngIf="car.car_4X4"> Yes</td>
+        <td *ngIf="!car.car_4X4"> No</td>
+      </tr>
+      <tr>
+        <td class="property-td">Engine Capacity</td>
+        <td>{{ car.car_EngineCapacity }}</td>
+      </tr>
+      <tr>
+        <td class="property-td">Year Production</td>
+        <td>{{ car.car_YearProduction }}</td>
+      </tr>
+      <tr>
+        <td class="property-td">Assigend to Employee</td>
+        <td *ngIf="car.employee_Id == 0">No</td>
+        <td *ngIf="car.employee_Id != 0">{{ car.employee.employee_FirstName }} {{ car.employee.employee_LastName }}</td>
+      </tr>
+      <tr>
+        <td class="property-td">Last Care Date</td>
+        <td>{{ car.car_CareDate | date : "dd/MM/yyyy" }}</td>
+      </tr>
+      <tr>
+        <td class="property-td">Last Updated</td>
+        <td>{{ car.car_UpdateDate | date : "dd/MM/yyyy hh:mm" }}</td>
+      </tr>
+      <tr *ngIf="car.car_Remarks != null">
+        <td class="property-td">Car Remarks</td>
+        <td>{{ car.car_Remarks }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
