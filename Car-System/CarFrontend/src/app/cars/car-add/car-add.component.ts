@@ -82,6 +82,7 @@ export class CarAddComponent implements OnInit {
       } else {
         this.mode = 'car-create';
         this.carId = 0;
+        this.isLoading = false;
       }
     });
   }
