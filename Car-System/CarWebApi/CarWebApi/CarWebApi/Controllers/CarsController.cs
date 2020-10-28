@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CarWebApi.Models;
 using Xunit.Abstractions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Threading;
 
 namespace CarWebApi.Controllers
 {
@@ -42,6 +43,7 @@ namespace CarWebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
+            Thread.Sleep(5000);
             var car = await _context.CarDB.FindAsync(id);
 
             if (car == null)

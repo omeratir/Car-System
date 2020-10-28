@@ -26,14 +26,14 @@ export class CarListComponent implements OnInit {
 
 
   // Search Pipes
-  car4X4radiovalue = '';
+  car4X4radiovalue;
   car4X4;
   carNumber = '';
   carType = '';
 
   // Values
-  valueTrue = true;
-  valueFalse = false;
+  valueYes = 'Y';
+  valueNo = 'N';
 
   // checkedSearch4X4
   isChecked = false;

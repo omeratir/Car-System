@@ -48,6 +48,5 @@ namespace CarWebApi.Models
         [Required]
         [DataType(DataType.Date)]
         public DateTime car_UpdateDate { get; set; }
-
     }
 }

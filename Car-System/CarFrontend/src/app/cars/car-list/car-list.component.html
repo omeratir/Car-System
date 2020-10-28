@@ -5,8 +5,8 @@
   <mat-checkbox [checked]="isChecked" (change)="isChecked = !isChecked; car4X4=undefined">Filter By 4X4 Car</mat-checkbox>
   <div *ngIf="isChecked">
   <mat-radio-group #searchcar4x4 (keyup)="onSearchCar4X4()" (change)="onChange()">
-    <mat-radio-button [value]="'Y'"> Yes </mat-radio-button>
-    <mat-radio-button [value]="'N'"> No </mat-radio-button>
+    <mat-radio-button [value]="valueYes"> Yes </mat-radio-button>
+    <mat-radio-button [value]="valueNo"> No </mat-radio-button>
   </mat-radio-group>
 </div>
 </mat-card>

@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CarAddComponent implements OnInit {
 
   car: Car;
-  isLoading = false;
+  isLoading = true;
   form: FormGroup;
 
   // Values

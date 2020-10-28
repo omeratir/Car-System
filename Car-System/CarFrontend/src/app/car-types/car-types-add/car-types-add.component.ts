@@ -33,7 +33,7 @@ export class CarTypesAddComponent implements OnInit {
       },
       error => { // while an error on save type
         console.log(error);
-        this.toastr.success('Error on Save Car Type' , 'Car Type Add');
+        this.toastr.error('Car Type Already Exists' , 'Car Type');
       }
     );
   }

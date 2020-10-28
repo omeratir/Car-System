@@ -52,6 +52,11 @@ namespace CarWebApi.Controllers
                 return BadRequest();
             }
 
+            if (_context.CarTypeDB.Any(c => (c.carType_Name.Equals(carType.carType_Name)) && (c.carType_Id != id)))
+            {
+                return BadRequest("Car Type already exists.");
+            }
+
             _context.Entry(carType).State = EntityState.Modified;
 
             try
@@ -79,6 +84,11 @@ namespace CarWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<CarType>> PostCarType(CarType carType)
         {
+            if (_context.CarTypeDB.Any(c => (c.carType_Name.Equals(carType.carType_Name))))
+            {
+                return BadRequest("Car Type already exists.");
+            }
+
             _context.CarTypeDB.Add(carType);
             await _context.SaveChangesAsync();
 
